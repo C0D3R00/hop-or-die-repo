@@ -6,38 +6,32 @@ using System.Collections.Generic;
 public class Hop : BehaviourAbstract
 {
     [SerializeField]
-    private Transform
-        _body;
+    private VoidEvent
+        _onHop;
 
-    [SerializeField]
-    private float
-        _timeToHop;
+    protected override void Update()
+    {
+        if (_playerState.CurrentState == PlayerStates.FALL) return;
 
-    //private IEnumerator HopCo()
-    //{
-    //    var startPosition = transform.position;
-    //    var targetPosition = -transform.forward * _flyAwayDistance;
-    //    var timer = 0f;
+        // reverse hop since camera is looking at the player from the front
 
-    //    while (timer < _timeToFlyAway)
-    //    {
-    //        timer += Time.deltaTime;
+        // disable script when powered up
+        switch (_inputState.CurrentInput)
+        {
+            case InputNames.NONE:
+                _playerState.CurrentState = PlayerStates.IDLE;
 
-    //        var parabola = MathParabola.Parabola(startPosition, targetPosition, _flyAwayHeight, timer / _timeToFlyAway);
-    //        var rotation = Quaternion.LookRotation(parabola - transform.position) * Quaternion.Euler(new Vector3(90f, 0f, 0f));
+                break;
+            case InputNames.TAP_LEFT:
+                _playerState.CurrentState = PlayerStates.HOP_RIGHT;
+                _onHop.Raise();
 
-    //        transform.rotation = rotation;
-    //        transform.position = parabola;
+                break;
+            case InputNames.TAP_RIGHT:
+                _playerState.CurrentState = PlayerStates.HOP_LEFT;
+                _onHop.Raise();
 
-    //        _body.Rotate(new Vector3(0f, _flyAwayRotationSpeed * Time.deltaTime, 0f));
-
-    //        yield return null;
-    //    }
-
-    //    _head.SetActive(false);
-    //    _head.transform.SetParent(null);
-
-    //    transform.SetParent(null);
-    //    gameObject.SetActive(false);
-    //}
+                break;
+        }
+    }
 }

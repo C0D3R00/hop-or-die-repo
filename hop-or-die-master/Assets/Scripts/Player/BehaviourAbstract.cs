@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,21 +12,17 @@ public abstract class BehaviourAbstract : MonoBehaviour
     protected Rigidbody
         _rb;
 
-    protected CollisionState
-        _collisionState;
+    protected InputState
+        _inputState;
 
     protected PlayerState
         _playerState;
 
-    protected Animator
-        _animator;
-
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _collisionState = GetComponent<CollisionState>();
+        _inputState = GetComponent<InputState>();
         _playerState = GetComponent<PlayerState>();
-        _animator = GetComponent<Animator>();
     }
 
     protected virtual void Start() { }
