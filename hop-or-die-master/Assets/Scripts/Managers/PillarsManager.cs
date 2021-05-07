@@ -27,30 +27,15 @@ public class PillarsManager : Singleton<PillarsManager>
     {
         var zPosition = _forwardDistance;
         var xPosition = 0f;
-        var alignment = 0;
+        var isLeft = false;
 
         // create starting pillars
         for (var i = 0; i < _totalPillars; i++)
         {
             var pillar = Instantiate(_pillarPrefab);
 
-            alignment = Random.Range(0, 3); // left, center, right
-
-            switch (alignment)
-            {
-                case 0:
-                    xPosition = -_horizontalDistance;
-
-                    break;
-                case 1:
-                    xPosition = 0f;
-
-                    break;
-                case 2:
-                    xPosition = _horizontalDistance;
-
-                    break;
-            }
+            isLeft = Random.Range(0, 2) == 0;
+            xPosition = isLeft ? -(_horizontalDistance / 2f) : _horizontalDistance / 2f;
 
             //pillar.transform.position = new Vector3(xPosition, 0f, zPosition);
             pillar.GetComponent<Pillar>().Show(true, xPosition, zPosition);
@@ -58,5 +43,14 @@ public class PillarsManager : Singleton<PillarsManager>
 
             yield return new WaitForSeconds(_pillarsSpawnInterval);
         }
+    }
+
+    public void OnHop()
+    {
+        // add pillar
+        var pillar = Instantiate(_pillarPrefab);
+        var isLeft = Random.Range(0, 2) == 0;
+
+        pillar.GetComponent<Pillar>().Show(true, isLeft ? -(_horizontalDistance / 2f) : _horizontalDistance / 2f, _forwardDistance * _totalPillars);
     }
 }

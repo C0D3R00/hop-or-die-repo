@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4428855799063640542}
   - component: {fileID: 4428855799063640543}
   - component: {fileID: -2696197545519984810}
+  - component: {fileID: 2697623148570240595}
   m_Layer: 0
   m_Name: pillar.prefab
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4428855799063640540}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -2.5, z: 0}
-  m_LocalScale: {x: 1, y: 5, z: 1}
+  m_LocalScale: {x: 0.95, y: 5, z: 0.95}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -112,3 +113,32 @@ MonoBehaviour:
   _minY: -5
   _maxY: 0
   _timeToMove: 0.5
+  _movementSpeed: 10
+--- !u!114 &2697623148570240595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4428855799063640540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebf44b1c7f1588e4abdbe83b7d02b851, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEvent: {fileID: 11400000, guid: 9a1d2ae869b31f0429d6a2dd11ffca57, type: 2}
+  unityEventResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -2696197545519984810}
+        m_TargetAssemblyTypeName: Pillar, Assembly-CSharp
+        m_MethodName: OnHop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
